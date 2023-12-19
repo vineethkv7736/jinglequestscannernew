@@ -8,10 +8,10 @@ const Scan = () => {
   const [email, setEmail] = useState("");
   const [scanCount, setScanCount] = useState(0);
 
-  const updateScanCount = () => {
-    setScanCount((prev)=>prev+1);
-    console.log("UP ",scanCount);
-    localStorage.setItem("scanCount", JSON.stringify(scanCount));
+  const updateScanCount = (count) => {
+    console.log("55",count);
+    setScanCount(count);
+    // localStorage.setItem("scanCount", JSON.stringify(scanCount));
   };
 
   const handleLogout = () => {
@@ -28,17 +28,19 @@ const Scan = () => {
   useEffect(() => {
     const storedNameJson = localStorage.getItem("user");
     const storedUser = JSON.parse(storedNameJson);
-    const storedScanCountJson = localStorage.getItem("scanCount");
-    const storedScanCount = parseInt(JSON.parse(storedScanCountJson), 10);
-    console.log(storedScanCount);
+    // const storedScanCountJson = localStorage.getItem("scanCount");
+    // const storedScanCount = parseInt(JSON.parse(storedScanCountJson), 10);
+    // console.log(storedScanCount);
     if (storedUser) {
       setName(storedUser.userName);
       setEmail(storedUser.email);
-      if (storedScanCount !== null) {
-        setScanCount(storedScanCount);
-      }
+    }else{
+      navigate("/");
     }
-    console.log(storedScanCount, scanCount);
+    // if (storedScanCount !== null) {
+    //   setScanCount(storedScanCount);
+    // }
+    // console.log(storedScanCount, scanCount);
   }, []);
   return (
     <div>

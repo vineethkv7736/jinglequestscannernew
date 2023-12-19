@@ -6,12 +6,14 @@ import { doc, updateDoc } from "firebase/firestore";
 const QRCodeScanner = (em) => {
   const [scanCount, setScanCount] = useState(0);
   const [test, testCount] = useState(0);
+  const [check,setCheck] = useState(false);
 
   useEffect(() => {
     const storedScanCountJson = localStorage.getItem("scanCount");
     const storedScanCount = parseInt(JSON.parse(storedScanCountJson), 10);
+    console.log(">>>",storedScanCount);
     if (storedScanCount !== null) {
-      setScanCount(storedScanCount);
+      em.updateScanCount(storedScanCount);
     }
     //testCount(prev=>prev+1);
   }, []);
@@ -76,10 +78,18 @@ const QRCodeScanner = (em) => {
   }, [test]);
 
   useEffect(() => {
-    localStorage.setItem("scanCount",scanCount);
-    em.updateScanCount();
-    console.log("Scancount:", scanCount);
+    if(check){
+      localStorage.setItem("scanCount", JSON.stringify(scanCount));
+      em.updateScanCount(scanCount);
+      console.log("Scancount:", scanCount);
+    }
   }, [scanCount]);
+  
+  useEffect(()=>{
+    if(!check){
+      setCheck(true)
+    }
+  },[scanCount])
 
   return (
     <div>
