@@ -22,4 +22,4 @@ jobs:
       run: npm install
 
     - name: Build and deploy
-      run: npm run build && firebase deploy --token ${{ secrets.FIREBASE_TOKEN }}
+      run: npm i,npm run build && firebase deploy --token ${{ secrets.FIREBASE_TOKEN }}
