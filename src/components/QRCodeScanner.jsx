@@ -97,7 +97,7 @@ const QRCodeScanner = (em) => {
             JSON.stringify([...scannedCodes, result])
           );
           qrCodeScanner.clear();
-          if (scanCount === 9) {
+          if (scanCount === 8) {
             upcount(em.email);
           }
           setScanCount((prev) => prev + 1);
