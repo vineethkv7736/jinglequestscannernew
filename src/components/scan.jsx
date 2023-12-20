@@ -19,6 +19,7 @@ const Scan = (e) => {
       e.updateState(false);
       localStorage.removeItem("user");
       localStorage.removeItem("scanCount");
+      if(scanCount===0)
       localStorage.removeItem("scannedCodes");
       // navigate("/");
     } else {
