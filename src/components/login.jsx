@@ -1,13 +1,11 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { auth } from "../firebase/config";
-import { useNavigate } from "react-router";
 
-const Login = () => {
+const Login = (e) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [pass, setpass] = useState("");
-  const navigate = useNavigate();
   const handleFormSubmit = () => {
     console.log(pass);
     console.log(email);
@@ -20,10 +18,11 @@ const Login = () => {
             userName: name,
             email: email,
           };
-          console.log(user);
+          e.updateState(true);
 
+          console.log(user);
           localStorage.setItem("user", JSON.stringify(user));
-          navigate("/scan");
+          // navigate("/scan");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -71,7 +70,7 @@ const Login = () => {
           />
         </label>
         <button
-          className="p-2 bg-red-900 mt-3 font-semibold text-white rounded-lg mt-2"
+          className="p-2 bg-red-900 mt-3 font-semibold text-white rounded-lg"
           onClick={handleFormSubmit}
         >
           LOGIN
