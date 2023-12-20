@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import QRCodeScanner from "./QRCodeScanner";
-import { useNavigate } from "react-router-dom";
 
-const Scan = () => {
-  const navigate = useNavigate();
+const Scan = (e) => {
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [scanCount, setScanCount] = useState(0);
@@ -17,10 +16,11 @@ const Scan = () => {
   const handleLogout = () => {
     let auth = window.prompt('Type "CONFIRM" to confirm logout');
     if (auth == "CONFIRM") {
+      e.updateState(false);
       localStorage.removeItem("user");
       localStorage.removeItem("scanCount");
       localStorage.removeItem("scannedCodes");
-      navigate("/");
+      // navigate("/");
     } else {
       window.alert("Try again");
     }
@@ -31,16 +31,10 @@ const Scan = () => {
     // const storedScanCountJson = localStorage.getItem("scanCount");
     // const storedScanCount = parseInt(JSON.parse(storedScanCountJson), 10);
     // console.log(storedScanCount);
-    if (storedUser) {
+  
       setName(storedUser.userName);
       setEmail(storedUser.email);
-    }else{
-      navigate("/");
-    }
-    // if (storedScanCount !== null) {
-    //   setScanCount(storedScanCount);
-    // }
-    // console.log(storedScanCount, scanCount);
+  
   }, []);
   return (
     <div>

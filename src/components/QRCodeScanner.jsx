@@ -14,8 +14,10 @@ const QRCodeScanner = (em) => {
     console.log(">>>",storedScanCount);
     if (storedScanCount !== null) {
       em.updateScanCount(storedScanCount);
+    }else{
+      em.updateScanCount(0);
     }
-    //testCount(prev=>prev+1);
+
   }, []);
 
   const upcount = async (email) => {
@@ -84,7 +86,7 @@ const QRCodeScanner = (em) => {
       console.log("Scancount:", scanCount);
     }
   }, [scanCount]);
-  
+
   useEffect(()=>{
     if(!check){
       setCheck(true)
